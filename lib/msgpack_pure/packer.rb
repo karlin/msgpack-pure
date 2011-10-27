@@ -23,6 +23,7 @@ class MessagePackPure::Packer
     when FalseClass then self.write_false
     when Float      then self.write_float(value)
     when String     then self.write_string(value)
+    when Symbol     then self.write_string(value.to_s)
     when Array      then self.write_array(value)
     when Hash       then self.write_hash(value)
     else raise("unknown type")

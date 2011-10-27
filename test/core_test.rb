@@ -70,4 +70,18 @@ class CoreTest < Test::Unit::TestCase
       assert_equal(value, value2)
     }
   end
+
+  def test_symbols
+    [
+      :foo,
+      :'bar baz'
+    ].each do |value|
+      bin1   = MessagePack.pack(value)
+      bin2   = MessagePackPure.pack(value)
+      value1 = MessagePackPure.unpack(bin1)
+      value2 = MessagePack.unpack(bin2)
+      assert_equal(value.to_s, value1)
+      assert_equal(value.to_s, value2)
+    end
+  end
 end
